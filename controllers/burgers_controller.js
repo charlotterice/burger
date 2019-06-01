@@ -1,5 +1,5 @@
 var express = require("express");
-var burgers = require("../models.burger.js");
+var burgers = require("../models/burger");
 var router = express.Router();
 
 // Get burgers from database
@@ -7,7 +7,7 @@ router.get("/", function(req, res) {
   connection.query("SELECT * FROM burgers;", function(err, data) {
     if (err) throw err;
 
-    res.render("index", { burgers: data });
+    res.render("index.handlebars", { burgers: data });
   });
 });
 
