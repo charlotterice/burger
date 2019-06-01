@@ -10,8 +10,6 @@ function printQuestionMarks(num) {
 
 	return arr.toString();
 }
-
-// Helper function for generating My SQL syntax
 function objToSql(ob) {
 	var arr = [];
 
@@ -21,13 +19,13 @@ function objToSql(ob) {
 
 	return arr.toString();
 }
+
 var orm = {
     selectAll: function(tableValues, cb) {
       var queryString = "SELECT *" + tableValues + ";";
       connection.query(queryString, function(err, result) {
         if (err) throw err;
         cb(result);
-        console.log(result);
       });
     },
     insertOne: function(table, cols, vals,cb) {
@@ -43,19 +41,19 @@ var orm = {
       connection.query(queryString, [vals], function(err, result) {
         if (err) throw err;
         cb(result);
-        console.log(result);
       });
     },
-   updateOne: function(table, ) {
-      var queryString =
-        "SELECT ??, COUNT(??) AS count FROM ?? LEFT JOIN ?? ON ??.??= ??.id GROUP BY ?? ORDER BY count DESC LIMIT 1";
-  
-      connection.query(
-        queryString,
-        [tableOneCol, tableOneCol, tableOne, tableTwo, tableTwo, tableTwoForeignKey, tableOne, tableOneCol],
-        function(err, result) {
+   updateOne: function(table, keyValue, condition, cb ) {
+      var queryString = "UPDATE"+table;
+
+          queryString += "SET";
+          queryString += objToSql(keyValue);
+          queryString += "WHERE";
+          queryString += condition;
+      console.log(queryString);
+      connection.query(queryString,function(err, result) {
           if (err) throw err;
-          console.log(result);
+          cb(result);
         }
       );
     }
