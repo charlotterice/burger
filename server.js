@@ -4,6 +4,10 @@ var bodyParser=require("body-parser");
 // Serve static content for the app from the "public" directory in the application directory.
 app.use(express.static("public"));
 
+var PORT = process.env.PORT || 3000;
+
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(express.json());
 // Parse request body as JSON
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
@@ -22,11 +26,4 @@ app.use(router);
 app.listen(PORT, function() {
   console.log("App now listening at:" + PORT);
 });
-
-var PORT = process.env.PORT || 3000;
-
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(express.json());
-
-
 
