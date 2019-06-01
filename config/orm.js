@@ -1,4 +1,4 @@
-var connection = require ("./connection.js");
+var connection = require("../config/connection.js");
 
 // helper function to print mySQL syntax
 function printQuestionMarks(num) {

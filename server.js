@@ -23,9 +23,10 @@ app.listen(PORT, function() {
   console.log("App now listening at:" + PORT);
 });
 
-var PORT = process.env.PORT || 3000;
+var PORT = process.env.PORT || 8080;
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
+
 
 
