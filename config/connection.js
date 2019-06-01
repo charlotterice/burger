@@ -37,11 +37,5 @@ connection.connect(function(err) {
 
   console.log("connected as id " + connection.threadId);
 });
-
-// Start our server so that it can begin listening to client requests.
-app.listen(PORT, function() {
-  // Log (server-side) when our server has started
-  console.log("Server listening on: http://localhost:" + PORT);
-});
 //export connection properties so we can use them in other files.
 module.exports = connection;

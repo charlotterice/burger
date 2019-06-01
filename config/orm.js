@@ -1,21 +1,52 @@
 var connection = require ("./connection.js");
+
+// helper function to print mySQL syntax
+function printQuestionMarks(num) {
+	var arr = [];
+
+	for (var i = 0; i < num; i++) {
+		arr.push("?");
+	}
+
+	return arr.toString();
+}
+
+// Helper function for generating My SQL syntax
+function objToSql(ob) {
+	var arr = [];
+
+	for (var key in ob) {
+		arr.push(key + "=" + ob[key]);
+	}
+
+	return arr.toString();
+}
 var orm = {
-    selectAll: function(tableInput, colToSearch, valOfCol) {
-      var queryString = "SELECT * FROM ?? WHERE ?? = ?";
-      connection.query(queryString, [tableInput, colToSearch, valOfCol], function(err, result) {
+    selectAll: function(tableValues, cb) {
+      var queryString = "SELECT *" + tableValues + ";";
+      connection.query(queryString, function(err, result) {
         if (err) throw err;
+        cb(result);
         console.log(result);
       });
     },
-    insertOne: function(whatToSelect, table, orderCol) {
-      var queryString = "SELECT ?? FROM ?? ORDER BY ?? DESC";
+    insertOne: function(table, cols, vals,cb) {
+      var queryString = "INSERT INTO" + table;
+
+      queryString += " (";
+      queryString += cols.toString();
+      queryString += ") ";
+      queryString += "VALUES (";
+      queryString += printQuestionMarks(vals.length);
+      queryString += ") ";
       console.log(queryString);
-      connection.query(queryString, [whatToSelect, table, orderCol], function(err, result) {
+      connection.query(queryString, [vals], function(err, result) {
         if (err) throw err;
+        cb(result);
         console.log(result);
       });
     },
-   updateOne: function(tableOneCol, tableTwoForeignKey, tableOne, tableTwo) {
+   updateOne: function(table, ) {
       var queryString =
         "SELECT ??, COUNT(??) AS count FROM ?? LEFT JOIN ?? ON ??.??= ??.id GROUP BY ?? ORDER BY count DESC LIMIT 1";
   
