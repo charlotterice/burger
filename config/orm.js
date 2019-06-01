@@ -21,8 +21,8 @@ function objToSql(ob) {
 }
 
 var orm = {
-    selectAll: function(tableValues, cb) {
-      var queryString = "SELECT *" + tableValues + ";";
+    selectAll: function(table, cb) {
+      var queryString = "SELECT *" + table + ";";
       connection.query(queryString, function(err, result) {
         if (err) throw err;
         cb(result);
@@ -38,13 +38,13 @@ var orm = {
       queryString += printQuestionMarks(vals.length);
       queryString += ") ";
       console.log(queryString);
-      connection.query(queryString, [vals], function(err, result) {
+      connection.query(queryString, vals, function(err, result) {
         if (err) throw err;
         cb(result);
       });
     },
    updateOne: function(table, keyValue, condition, cb ) {
-      var queryString = "UPDATE"+table;
+      var queryString = "UPDATE" + table;
 
           queryString += "SET";
           queryString += objToSql(keyValue);

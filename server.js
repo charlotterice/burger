@@ -1,7 +1,6 @@
 var express = require("express");
 var app = express();
 var bodyParser=require("body-parser");
-var methodOverride = require("method-override");
 // Serve static content for the app from the "public" directory in the application directory.
 app.use(express.static("public"));
 
@@ -20,13 +19,13 @@ var routes = require("./controllers/burgers_controller.js");
 
 app.use(routes);
 
-app.listen(port, function() {
+app.listen(PORT, function() {
   console.log("App now listening at:" + PORT);
 });
 
-var port = process.env.PORT || 3000;
+var PORT = process.env.PORT || 3000;
 
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
 
-// Override with POST having ?_method=DELETE
-app.use(methodOverride('_method'));
+
