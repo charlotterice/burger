@@ -6,7 +6,7 @@ $(document).ready(function(){
         var newBurger = {
             name: $("#bur").val().trim()
         };
-        $.ajax("/api/burgers",{
+        $.ajax("/api/create",{
             type: "POST",
             data: newBurger
         }).then(function(){
