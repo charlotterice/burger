@@ -23,7 +23,7 @@ var router = require("./controllers/burgers_controller.js");
 
 app.use(router);
 
-db.Sequelize.sync().then(function(){app.listen(PORT, function() {
+db.sequelize.sync().then(function(){app.listen(PORT, function() {
   console.log("App now listening at:" + PORT);
 });
 });
