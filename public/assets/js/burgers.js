@@ -1,20 +1,21 @@
-$(document).ready(function(){
+$(document).ready(function() {
+  
     $(".create-form").on("submit", function(event) {
-        event.preventDefault();
-        console.log("submit form");
-        console.log($("#bur").val().trim());
-        var newBurger = {
-            name: $("#bur").val().trim()
-        };
-        $.ajax("/api/create",{
-            type: "POST",
-            data: newBurger
-        }).then(function(){
-            location.reload();
-            console.log(newBurger);
-        });
-      });   
-})
+      event.preventDefault();
+    
+      var burger_id = $(this).children("bur").val();
+      $.ajax({
+        method: "PUT",
+        url: "/api/update/" + burger_id
+      }).then(function(data) {
+        // reload page to display devoured burger in proper column
+        location.reload();
+      });
+    
+    });
+  });
+  
+    
 
 
 // $(function(){
