@@ -35,7 +35,7 @@ router.post("/api/create", function(req, res) {
 router.put("/api/update", function(req, res) {
   if (req.body.customer) {
     db.Customer.create({
-      customer: req.body.customer,
+      // customer: req.body.customer,
       BurgerId: req.body.burger_id
     })
       .then(function(dbCustomer) {
